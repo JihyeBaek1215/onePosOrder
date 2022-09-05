@@ -5,6 +5,7 @@ import javax.persistence.*;
 @Embeddable
 public class OrderItem {
 
+    String menuNm;
     String menuId;
     int quantity;
     int price;
@@ -27,6 +28,13 @@ public class OrderItem {
     public void setPrice(int price){
         this.price = price;
     }
+    public String getMenuNm() {
+        return menuNm;
+    }
+    public void setMenuNm(String menuNm) {
+        this.menuNm = menuNm;
+    }
 
-    
+
+
 }
