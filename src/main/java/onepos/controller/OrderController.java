@@ -14,7 +14,7 @@ import onepos.service.OrderService;
 @RestController
 public class OrderController {
 
-	OrderService orderService;
+	private final OrderService orderService;
 
 	@PostMapping("/orders/{storeId}/{tableId}") // N건 조회 . 매장ID로 조회
 	public String order(@PathVariable int storeId, @PathVariable int tableId, @RequestBody OrderItem orderItem)

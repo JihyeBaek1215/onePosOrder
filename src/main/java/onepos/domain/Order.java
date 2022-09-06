@@ -18,8 +18,8 @@ public class Order {
     OrderItem orderItems = new OrderItem();
 
     // 주문했을 때
-    @PrePersist
-    public void onPrePersist(){
+    @PostPersist
+    public void onPostPersist(){
         this.setStatus(OrderStatus.orderRequest);
         System.out.println(this.getStatus());
         Ordered ordered = new Ordered();
