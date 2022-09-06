@@ -1,4 +1,4 @@
-package main.java.onepos.service;
+package onepos.service;
 import lombok.RequiredArgsConstructor;
 
 import java.util.ArrayList;
@@ -7,9 +7,9 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import onepos.Order;
-import onepos.OrderItem;
-import onepos.OrderRepository;
+import onepos.domain.Order;
+import onepos.domain.OrderItem;
+import onepos.domain.OrderRepository;
 
 
 @RequiredArgsConstructor

@@ -1,4 +1,4 @@
-package onepos;
+package onepos.domain;
 
 public enum OrderStatus {
     orderRequest,  cancelRequest, cooking, canceled, served

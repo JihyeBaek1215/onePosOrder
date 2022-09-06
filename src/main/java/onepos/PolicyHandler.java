@@ -4,6 +4,12 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import onepos.config.kafka.KafkaProcessor;
+import onepos.domain.Order;
+import onepos.domain.OrderCancelled;
+import onepos.domain.OrderRepository;
+import onepos.domain.OrderStatus;
+import onepos.domain.Paid;
+import onepos.domain.Refunded;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.annotation.StreamListener;

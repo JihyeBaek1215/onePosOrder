@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import lombok.RequiredArgsConstructor;
-import main.java.onepos.service.OrderService;
-import onepos.OrderItem;
+import onepos.domain.OrderItem;
+import onepos.service.OrderService;
 
 
 @RequiredArgsConstructor

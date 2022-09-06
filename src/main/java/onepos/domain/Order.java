@@ -1,4 +1,4 @@
-package onepos;
+package onepos.domain;
 
 import javax.persistence.*;
 

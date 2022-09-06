@@ -1,5 +1,7 @@
-package onepos;
+package onepos.domain;
 import java.util.*;
+
+import onepos.AbstractEvent;
 
 public class OrderCancelled extends AbstractEvent {
 

@@ -1,6 +1,8 @@
-package onepos;
+package onepos.domain;
 
 import java.util.Date;
+
+import onepos.AbstractEvent;
 
 public class Paid  extends AbstractEvent {
     int orderId; //주문번호

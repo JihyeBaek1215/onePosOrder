@@ -1,7 +1,9 @@
 
-package onepos;
+package onepos.domain;
 
 import java.util.Date;
+
+import onepos.AbstractEvent;
 
 public class Refunded extends AbstractEvent {
 
