@@ -24,6 +24,7 @@ public class Order {
         System.out.println(this.getStatus());
         Ordered ordered = new Ordered();
         ordered.setId(this.getId());
+        ordered.setStoreId(this.getStoreId());
         ordered.setOrderItems(this.getOrderItems());
         ordered.setStatus(this.getStatus());
         ordered.publishAfterCommit(); // kafka 발행
