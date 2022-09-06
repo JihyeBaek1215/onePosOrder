@@ -28,6 +28,12 @@ public class OrderService {
 		order.setTableNo(tableId);
 		orderRepository.save(order);
 	}
+
+	@Transactional(readOnly = true)
+	public Order checkOrder(int storeId, int orderId){
+		Order order = orderRepository.findByStoreIdAndId(storeId,orderId);
+		return order;
+	}
 	// @Transactional(readOnly = true) // 변경감지 자체를 수행안한다. select하는곳에는 다 붙혀줘야함
 	// public List<MenuRespDto> 메뉴조회 (int id) {
 

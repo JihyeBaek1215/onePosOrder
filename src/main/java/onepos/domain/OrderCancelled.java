@@ -6,6 +6,7 @@ import onepos.AbstractEvent;
 public class OrderCancelled extends AbstractEvent {
 
     private int id;
+    private int storeId;
     private OrderStatus status;
 
     public int getId() {
@@ -20,4 +21,11 @@ public class OrderCancelled extends AbstractEvent {
     public void setStatus(OrderStatus status) {
         this.status = status;
     }
+    public int getStoreId() {
+        return storeId;
+    }
+    public void setStoreId(int storeId) {
+        this.storeId = storeId;
+    }
+
 }

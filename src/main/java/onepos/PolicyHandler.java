@@ -16,7 +16,6 @@ import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
 
 @Service
 public class PolicyHandler{
@@ -33,8 +32,7 @@ public class PolicyHandler{
     public void wheneverPaid(@Payload Paid paid){
 
          if(paid.isMe()){
-            Optional<Order> orderOptional = orderRepository.findById(paid.getOrderId());
-            Order order = orderOptional.get();
+            Order order = orderRepository.findByStoreIdAndId(paid.getStoreId(),paid.getOrderId());
             order.setStatus(OrderStatus.cooking);
 
             orderRepository.save(order);
@@ -47,8 +45,7 @@ public class PolicyHandler{
     public void wheneverRefunded(@Payload Refunded refunded){
 
          if(refunded.isMe()){
-            Optional<Order> orderOptional = orderRepository.findById(refunded.getOrderId());
-            Order order = orderOptional.get();
+            Order order = orderRepository.findByStoreIdAndId(refunded.getStoreId(),refunded.getOrderId());
             order.setStatus(OrderStatus.canceled);
 
             orderRepository.save(order);
@@ -61,8 +58,7 @@ public class PolicyHandler{
     public void wheneverCanceled(@Payload OrderCancelled orderCancelled){
 
          if(orderCancelled.isMe()){
-            Optional<Order> orderOptional = orderRepository.findById(orderCancelled.getId());
-            Order order = orderOptional.get();
+            Order order = orderRepository.findByStoreIdAndId(orderCancelled.getStoreId(), orderCancelled.getId());
             order.setStatus(OrderStatus.canceled);
 
             orderRepository.save(order);

@@ -12,6 +12,7 @@ public class Order {
 
     private int storeId;
     private int tableNo;
+    private String holeflag; // "Pack" "Hole"
     private OrderStatus status;
 
     @Embedded
@@ -26,6 +27,7 @@ public class Order {
             ordered.setStoreId(this.getStoreId());
             ordered.setOrderItems(this.getOrderItems());
             ordered.setStatus(this.getStatus());
+            ordered.setHoleflag(this.getHoleflag());
             ordered.publishAfterCommit(); // kafka 발행
         }
     }
@@ -67,6 +69,13 @@ public class Order {
     }
     public void setStatus(OrderStatus status) {
         this.status = status;
+    }
+
+    public String getHoleflag() {
+        return holeflag;
+    }
+    public void setHoleflag(String holeflag) {
+        this.holeflag = holeflag;
     }
 
 }
