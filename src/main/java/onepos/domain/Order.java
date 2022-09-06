@@ -20,23 +20,25 @@ public class Order {
     // 주문했을 때
     @PostPersist
     public void onPostPersist(){
-        this.setStatus(OrderStatus.orderRequest);
-        System.out.println(this.getStatus());
-        Ordered ordered = new Ordered();
-        ordered.setId(this.getId());
-        ordered.setStoreId(this.getStoreId());
-        ordered.setOrderItems(this.getOrderItems());
-        ordered.setStatus(this.getStatus());
-        ordered.publishAfterCommit(); // kafka 발행
+        if(this.getStatus() == OrderStatus.orderRequest){
+            Ordered ordered = new Ordered();
+            ordered.setId(this.getId());
+            ordered.setStoreId(this.getStoreId());
+            ordered.setOrderItems(this.getOrderItems());
+            ordered.setStatus(this.getStatus());
+            ordered.publishAfterCommit(); // kafka 발행
+        }
     }
 
     //손님이 주문취소했을 때
     @PostUpdate
     public void onPostUpdate(){
-        OrderCancelled ordercancelled = new OrderCancelled();
-        ordercancelled.setId(this.getId());
-        ordercancelled.setStatus(this.getStatus());
-        ordercancelled.publishAfterCommit();
+        if(this.getStatus() == OrderStatus.cancelRequest){
+            OrderCancelled ordercancelled = new OrderCancelled();
+            ordercancelled.setId(this.getId());
+            ordercancelled.setStatus(this.getStatus());
+            ordercancelled.publishAfterCommit();
+        }
     }
 
     public int getId(){

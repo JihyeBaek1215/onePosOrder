@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import onepos.domain.Order;
 import onepos.domain.OrderItem;
 import onepos.domain.OrderRepository;
+import onepos.domain.OrderStatus;
 
 
 @RequiredArgsConstructor
@@ -21,6 +22,7 @@ public class OrderService {
 	@Transactional
 	public void createNewOrder(int storeId, int tableId, OrderItem orderItem){
 		Order order = new Order();
+		order.setStatus(OrderStatus.orderRequest);
    	order.setOrderItems(orderItem);
 		order.setStoreId(storeId);
 		order.setTableNo(tableId);

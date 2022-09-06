@@ -20,7 +20,7 @@ public class OrderController {
 	public String order(@PathVariable int storeId, @PathVariable int tableId, @RequestBody OrderItem orderItem)
 	{
 		orderService.createNewOrder(storeId, tableId, orderItem);
-		System.out.println(("OrderItem = "+orderItem.toString()));
+		// System.out.println(("OrderItem = "+orderItem.toString()));
 		return "OK";
 	}
 
