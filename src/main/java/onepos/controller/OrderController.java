@@ -1,6 +1,7 @@
 package onepos.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,6 +29,12 @@ public class OrderController {
 
 	@GetMapping("/orders/{storeId}/{orderId}")
 	public Order checkOrder(@PathVariable int storeId, @PathVariable int orderId){
+		Order order = orderService.checkOrder(storeId, orderId);
+		return order;
+	}
+
+	@PatchMapping("/orders/cancel/{orderId}")
+	public Order cancelOrder(@PathVariable int storeId, @PathVariable int orderId){
 		Order order = orderService.checkOrder(storeId, orderId);
 		return order;
 	}
