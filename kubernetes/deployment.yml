@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: order
+  name: order-backend
   labels:
-    app: order
+    app: order-backend
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: order
+      app: order-backend
   template:
     metadata:
       labels:
-        app: order
+        app: order-backend
     spec:
       containers:
-        - name: order
-          image: clothrentalcsh.azurecr.io/order
+        - name: order-backend
+          image: 648568805009.dkr.ecr.ap-northeast-2.amazonaws.com/oneposorder:latest
           ports:
             - containerPort: 8080
           resources:
