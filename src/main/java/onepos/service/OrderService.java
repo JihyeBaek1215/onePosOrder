@@ -20,34 +20,30 @@ public class OrderService {
 	private final OrderRepository orderRepository;
 
 	@Transactional
-	public void createNewOrder(int storeId, int tableId, OrderItem orderItem){
+	public int createNewOrder(int storeId, int tableId, String holeflag, OrderItem orderItem){
 		Order order = new Order();
 		order.setStatus(OrderStatus.orderRequest);
    	order.setOrderItems(orderItem);
 		order.setStoreId(storeId);
 		order.setTableNo(tableId);
-		orderRepository.save(order);
+		order.setHoleflag(holeflag);
+		int orderId = orderRepository.save(order).getId();
+		return orderId;
+
 	}
 
 	@Transactional(readOnly = true)
 	public Order checkOrder(int storeId, int orderId){
-		Order order = orderRepository.findByStoreIdAndId(storeId,orderId);
+		Order order = orderRepository.findById(orderId);
 		return order;
 	}
-	// @Transactional(readOnly = true) // 변경감지 자체를 수행안한다. select하는곳에는 다 붙혀줘야함
-	// public List<MenuRespDto> 메뉴조회 (int id) {
 
-
-	// 	List<Menu> menuEntity = menuRepository.searchStore(id);
-
-
-	// 	List<MenuRespDto> MenuRespDtos = new ArrayList<>();
-	//     for (Menu menu : menuEntity) {
-	//     	MenuRespDtos.add(new MenuRespDto(menu));
-	// 	}
-
-
-	// 	return MenuRespDtos;
-	// }
+	@Transactional(readOnly = true)
+	public Order cancelOrder(int orderId){
+		Order order = orderRepository.findById(orderId);
+		order.setStatus(OrderStatus.cancelRequest);
+		orderRepository.save(order);
+		return order;
+	}
 
 }

@@ -19,23 +19,25 @@ public class OrderController {
 
 	private final OrderService orderService;
 
-	@PostMapping("/orders/{storeId}/{tableId}") // N건 조회 . 매장ID로 조회
-	public String order(@PathVariable int storeId, @PathVariable int tableId, @RequestBody OrderItem orderItem)
+	//주문
+	@PostMapping("/orders/{storeId}/{tableId}/{holeflag}")
+	public int order(@PathVariable int storeId, @PathVariable int tableId,@PathVariable String holeflag, @RequestBody OrderItem orderItem)
 	{
-		orderService.createNewOrder(storeId, tableId, orderItem);
-		// System.out.println(("OrderItem = "+orderItem.toString()));
-		return "OK";
+		int orderId = orderService.createNewOrder(storeId, tableId, holeflag, orderItem);
+		return orderId;
 	}
 
+	// 주문조회
 	@GetMapping("/orders/{storeId}/{orderId}")
 	public Order checkOrder(@PathVariable int storeId, @PathVariable int orderId){
 		Order order = orderService.checkOrder(storeId, orderId);
 		return order;
 	}
 
+	// 주문취소
 	@PatchMapping("/orders/cancel/{orderId}")
-	public Order cancelOrder(@PathVariable int storeId, @PathVariable int orderId){
-		Order order = orderService.checkOrder(storeId, orderId);
+	public Order cancelOrder(@PathVariable int orderId){
+		Order order = orderService.cancelOrder(orderId);
 		return order;
 	}
 

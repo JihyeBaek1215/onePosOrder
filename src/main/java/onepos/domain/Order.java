@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Order {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.SEQUENCE)
     private int id;
 
     private int storeId;
@@ -28,6 +28,7 @@ public class Order {
             ordered.setOrderItems(this.getOrderItems());
             ordered.setStatus(this.getStatus());
             ordered.setHoleflag(this.getHoleflag());
+            ordered.setTableNo(this.getTableNo());
             ordered.publishAfterCommit(); // kafka 발행
         }
     }
