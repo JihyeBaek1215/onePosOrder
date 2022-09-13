@@ -38,7 +38,7 @@ public class OrderService {
 		return order;
 	}
 
-	@Transactional(readOnly = true)
+	@Transactional
 	public Order cancelOrder(int orderId){
 		Order order = orderRepository.findById(orderId);
 		order.setStatus(OrderStatus.cancelRequest);
