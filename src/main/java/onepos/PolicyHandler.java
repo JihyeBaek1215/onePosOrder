@@ -30,25 +30,13 @@ public class PolicyHandler{
     @Autowired
     OrderRepository orderRepository;
 
-    // 계산 완료되어 조리 중으로 넘어감
-    @StreamListener(KafkaProcessor.INPUT)
-    public void wheneverPaid(@Payload Paid paid){
-
-         if(paid.isMe()){
-            Order order = orderRepository.findByStoreIdAndId(paid.getStoreId(),paid.getOrderId());
-            order.setStatus(OrderStatus.cooking);
-
-            orderRepository.save(order);
-            System.out.println("##### listener order paid : " + paid.toJson());
-        }
-    }
-
+    
     // 계산 취소되어 주문 취소됨
     @StreamListener(KafkaProcessor.INPUT)
     public void wheneverRefunded(@Payload Refunded refunded){
 
          if(refunded.isMe()){
-            Order order = orderRepository.findByStoreIdAndId(refunded.getStoreId(),refunded.getOrderId());
+            Order order = orderRepository.findById(refunded.getOrderId());
             order.setStatus(OrderStatus.canceled);
 
             orderRepository.save(order);
